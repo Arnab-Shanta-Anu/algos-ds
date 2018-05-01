@@ -8,6 +8,7 @@ void traverse(int start,int n)
         printf("%d ",info[ptr]);
         ptr=link[ptr];
     }
+    printf("\n\n");
 }
 int search(int start, int key)
 {
@@ -32,12 +33,11 @@ void insrtAf(int start, int ind, int avail, int data)
 {
     info[avail]=data;
 
-
     int ptr=start,tmp;
     while(ptr!=ind-1){
         ptr=link[ptr];
     }
-    tmp=ptr;
+    tmp=link[ptr];
     link[ptr]=avail;
     ptr=link[ptr];
     link[ptr]=tmp;
@@ -63,6 +63,7 @@ int main()
 {
     int i,n;
     scanf("%d",&n);
+   /**input**/
     for(i=0;i<n;i++){
         scanf("%d",&info[i]);
         if(i==n-1)
@@ -71,13 +72,25 @@ int main()
             link[i]=i+1;
         avail++;
     }
+
+    /**traversing**/
     traverse(start,n);
+
+    /**searching**/
     int ind=search(start,2);
     if(ind==-999)
         printf("key isnt in list....\n\n");
     else
         printf("key is in index %d\n\n",ind);
 
+    /**insert at front**/
+//    insrtF(avail,12);
+//    n++;
+//    traverse(start,n);
 
+    /**insert after a given node**/
+    insrtAf(start,2,avail,7);
+    n++;
+    traverse(start,n);
     return 0;
 }
